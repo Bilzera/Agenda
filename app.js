@@ -29,15 +29,29 @@ app.get('/agenda', (req, res) => {
   res.send(lista)
 })
 
+//app.post('/agenda', (req, res) => {
+//  const { name, phone } = req.body || ''
+//  const id = lista.length + 1
+//  const pessoa = { id, name, phone }
+//  lista.push(pessoa)
+//  res.send({ pessoa })
+//})
+
 app.post('/agenda', (req, res) => {
   const { name, phone } = req.body || ''
-  const id = lista.length + 1
-  const pessoa = { id, name, phone }
+  let maiorID = 0
+  lista.forEach(x => {
+    if (maiorID <= x.id) {
+      maiorID = x.id
+      maiorID = maiorID + 1
+    }
+  })
+
+  const pessoa = { maiorID, name, phone }
   lista.push(pessoa)
   res.send({ pessoa })
-  console.log(req.body)
-  //lista.push()
 })
+
 
 app.get('/agenda/:id', (req, res) => {
   const idParams = req.params.id
@@ -47,10 +61,16 @@ app.get('/agenda/:id', (req, res) => {
 
 app.delete('/agenda/:id', (req, res) => {
   const idParams = req.params.id
-  //percorrer a lista e encontrar o indice baseado no ID fornecido
-  //passamdo id 2 ele retornaria in
-  lista.pop(1)
-
+  lista.splice(lista.findIndex(i => i.id == idParams), 1)
+  res.send("removido com sucesso")
 })
+
+
+
+//app.update('/agenda/:id', (req, res) => {
+ // const idParams = req.params.id
+  //lista.update(lista.findIndex(i => i.id == idParams), 1)
+ // res.send("")
+//})
 
 

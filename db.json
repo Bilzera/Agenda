@@ -1,5 +1,5 @@
 {
-  "Pessoas": [
+  "pessoas": [
     {
       "id": 1,
       "name": "Brock",
@@ -7,7 +7,7 @@
     },
     {
       "id": 2,
-      "name": "Misty",
+      "name": "M",
       "phone": "988776655"
     },
     {
